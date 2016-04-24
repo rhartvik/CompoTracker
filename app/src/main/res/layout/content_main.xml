@@ -122,4 +122,12 @@
         android:layout_below="@+id/bonemasstitle"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="@dimen/under_input_field_margin"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/weight_chart_button"
+        android:text="@string/view_weight_chart"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"/>
 </RelativeLayout>
