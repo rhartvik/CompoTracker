@@ -16,7 +16,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Compo Tracker 1.0"
+        android:text="@string/compo_tracker_1_0"
         android:id="@+id/maintitle"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -26,7 +26,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Body Weight"
+        android:text="@string/body_weight"
         android:id="@+id/bodyweighttitle"
         android:layout_below="@+id/maintitle"
         android:layout_centerHorizontal="true"
@@ -46,7 +46,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Body Fat %"
+        android:text="@string/body_fat_percent"
         android:id="@+id/bodyfattitle"
         android:layout_below="@+id/bodyweight"
         android:layout_centerHorizontal="true"
@@ -66,7 +66,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Total Body Water %"
+        android:text="@string/total_body_water"
         android:id="@+id/totalbodywatertitle"
         android:layout_below="@+id/bodyfat"
         android:layout_centerHorizontal="true"
@@ -86,7 +86,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Muscle Mass"
+        android:text="@string/muscle_percent"
         android:id="@+id/musclemasstitle"
         android:layout_below="@+id/totalbodywater"
         android:layout_centerHorizontal="true"
@@ -106,7 +106,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Bone Mass"
+        android:text="@string/bone_mass"
         android:id="@+id/bonemasstitle"
         android:layout_below="@+id/musclemass"
         android:layout_centerHorizontal="true"

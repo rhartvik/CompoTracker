@@ -12,4 +12,10 @@
     <string name="weight_entry_plaintext_short">
         %1$s: \tBW: %2$.1f \tF:%3$.1f \tW:%4$.1f \tM:%5$.1f \tB:%6$.1f\n
     </string>
+    <string name="muscle_percent">Body Muscle %</string>
+    <string name="total_body_water">Total Body Water %</string>
+    <string name="body_fat_percent">Body Fat %</string>
+    <string name="body_weight">Body Weight</string>
+    <string name="compo_tracker_1_0">Compo Tracker 1.0</string>
+    <string name="bone_mass">Bone Mass</string>
 </resources>
