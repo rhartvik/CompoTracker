@@ -50,26 +50,43 @@ public class MainActivity extends AppCompatActivity {
                 Long currentTimestamp = currentDate.getTime();
 
                 EditText bodyWeightEditText = (EditText) findViewById(R.id.bodyweight);
-                Double bodyWeight = Double.parseDouble(bodyWeightEditText.getText().toString());
+                EditText fatPercentEditText = (EditText)findViewById(R.id.bodyfat);
+                EditText waterPercentEditText = (EditText)findViewById(R.id.totalbodywater);
+                EditText musclePercentEditText = (EditText)findViewById(R.id.musclemass);
+                EditText boneWeightEditText = (EditText)findViewById(R.id.bonemass);
+
+
+                Double bodyWeight;
+                Double bodyFatPercent;
+                Double bodyWaterPercent;
+                Double bodyMusclePercent;
+                Double boneWeight;
+
+                try {
+                    bodyWeight = Double.parseDouble(bodyWeightEditText.getText().toString());
+                    bodyFatPercent = Double.parseDouble(fatPercentEditText.getText().toString());
+                    bodyWaterPercent = Double.parseDouble(waterPercentEditText.getText().toString());
+                    bodyMusclePercent = Double.parseDouble(musclePercentEditText.getText().toString());
+                    boneWeight = Double.parseDouble(boneWeightEditText.getText().toString());
+                } catch (final NumberFormatException e) {
+
+                    Snackbar.make(view, "Number format exception. Please ensure your data is entered correctly."
+                            , Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show();
+                    return;
+                }
+
                 int bodyWeight10 = (int) (bodyWeight * 10);
 
-                EditText fatPercentEditText = (EditText)findViewById(R.id.bodyfat);
-                Double bodyFatPercent = Double.parseDouble(fatPercentEditText.getText().toString());
                 int bodyFatPercent10 = (int) (bodyFatPercent * 10);
                 int bodyFatWeight10 = (int)Math.round(bodyFatPercent * bodyWeight / 10);
 
-                EditText waterPercentEditText = (EditText)findViewById(R.id.totalbodywater);
-                Double bodyWaterPercent = Double.parseDouble(waterPercentEditText.getText().toString());
                 int bodyWaterPercent10 = (int) (bodyWaterPercent * 10);
                 int bodyWaterWeight10 = (int)Math.round(bodyWaterPercent * bodyWeight / 10);
 
-                EditText musclePercentEditText = (EditText)findViewById(R.id.musclemass);
-                Double bodyMusclePercent = Double.parseDouble(musclePercentEditText.getText().toString());
                 int bodyMusclePercent10 = (int) (bodyMusclePercent * 10);
                 int bodyMuscleWeight10 = (int)Math.round(bodyMusclePercent * bodyWeight / 10);
 
-                EditText boneWeightEditText = (EditText)findViewById(R.id.bonemass);
-                Double boneWeight = Double.parseDouble(boneWeightEditText.getText().toString());
                 int boneWeight10 = (int) (boneWeight * 10);
                 int bonePercent10 = (int)Math.round(boneWeight * 1000 / bodyWeight);
 
