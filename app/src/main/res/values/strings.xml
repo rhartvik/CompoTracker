@@ -18,4 +18,7 @@
     <string name="body_weight">Body Weight</string>
     <string name="compo_tracker_1_0">Compo Tracker 1.0</string>
     <string name="bone_mass">Bone Mass</string>
+    <string name="fat_mass">Fat Mass</string>
+    <string name="water_weight">Water Weight</string>
+    <string name="muscle_mass">Muscle Mass</string>
 </resources>
