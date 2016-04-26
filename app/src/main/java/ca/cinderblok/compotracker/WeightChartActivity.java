@@ -2,6 +2,7 @@ package ca.cinderblok.compotracker;
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -120,16 +121,40 @@ public class WeightChartActivity extends AppCompatActivity {
 
 
                 // Prepare data for chart
+                int colorTotal, colorFat, colorWater, colorMuscle, colorBone;
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                    colorTotal = getColor(R.color.colorTotal);
+                    colorFat = getColor(R.color.colorFat);
+                    colorWater = getColor(R.color.colorWater);
+                    colorMuscle = getColor(R.color.colorMuscle);
+                    colorBone = getColor(R.color.colorBone);
+                } else {
+                    colorTotal = getResources().getColor(R.color.colorTotal);
+                    colorFat = getResources().getColor(R.color.colorFat);
+                    colorWater = getResources().getColor(R.color.colorWater);
+                    colorMuscle = getResources().getColor(R.color.colorMuscle);
+                    colorBone = getResources().getColor(R.color.colorBone);
+                }
                 LineDataSet setTotal = new LineDataSet(valsTotalBodyWeight, getString(R.string.body_weight));
                 setTotal.setAxisDependency(YAxis.AxisDependency.LEFT);
+                setTotal.setColor(colorTotal);
+                setTotal.setCircleColor(colorTotal);
                 LineDataSet setFat = new LineDataSet(valsTotalFatWeight, getString(R.string.fat_mass));
                 setFat.setAxisDependency(YAxis.AxisDependency.LEFT);
+                setFat.setColor(colorFat);
+                setFat.setCircleColor(colorFat);
                 LineDataSet setWater = new LineDataSet(valsTotalWaterWeight, getString(R.string.water_weight));
                 setWater.setAxisDependency(YAxis.AxisDependency.LEFT);
+                setWater.setColor(colorWater);
+                setWater.setCircleColor(colorWater);
                 LineDataSet setMuscle = new LineDataSet(valsTotalMuscleWeight, getString(R.string.muscle_mass));
                 setMuscle.setAxisDependency(YAxis.AxisDependency.LEFT);
+                setMuscle.setColor(colorMuscle);
+                setMuscle.setCircleColor(colorMuscle);
                 LineDataSet setBone = new LineDataSet(valsTotalBoneWeight, getString(R.string.bone_mass));
                 setBone.setAxisDependency(YAxis.AxisDependency.LEFT);
+                setBone.setColor(colorBone);
+                setBone.setCircleColor(colorBone);
 
                 ArrayList<ILineDataSet> weightDataSets = new ArrayList<ILineDataSet>();
                 weightDataSets.add(setTotal);

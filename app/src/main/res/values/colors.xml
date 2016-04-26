@@ -3,4 +3,9 @@
     <color name="colorPrimary">#58a9bb</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="colorTotal">#996633</color>
+    <color name="colorFat">#ffaa00</color>
+    <color name="colorWater">#1affff</color>
+    <color name="colorMuscle">#cc3399</color>
+    <color name="colorBone">#e6e6ff</color>
 </resources>
