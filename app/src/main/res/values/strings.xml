@@ -21,4 +21,6 @@
     <string name="fat_mass">Fat Mass</string>
     <string name="water_weight">Water Weight</string>
     <string name="muscle_mass">Muscle Mass</string>
+    <string name="weight_chart">Weight Chart</string>
+    <string name="percent_chart">Percent Chart</string>
 </resources>
