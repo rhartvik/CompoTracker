@@ -26,9 +26,6 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        CompoDbHelper mDbHelper = new CompoDbHelper(this, CompoDbContract.DATABASE_NAME, null, CompoDbContract.DATABASE_VERSION);
-        mDb =  mDbHelper.getWritableDatabase(); // ????
-
         // Hook up the button for the Weight Chart Activity
         Button goToWeightChartActivityButton = (Button) findViewById(R.id.weight_chart_button);
         goToWeightChartActivityButton.setOnClickListener(new View.OnClickListener() {
@@ -126,6 +123,19 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        CompoDbHelper mDbHelper = new CompoDbHelper(this, CompoDbContract.DATABASE_NAME, null, CompoDbContract.DATABASE_VERSION);
+        mDb =  mDbHelper.getWritableDatabase(); // ????
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        mDb.close();
     }
 
     @Override
