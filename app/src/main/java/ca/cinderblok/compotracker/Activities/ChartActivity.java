@@ -1,4 +1,5 @@
-package ca.cinderblok.compotracker;
+package ca.cinderblok.compotracker.Activities;
+
 
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -11,6 +12,10 @@ import android.support.v7.widget.Toolbar;
 import android.text.format.DateFormat;
 import android.view.View;
 import android.widget.EditText;
+
+import ca.cinderblok.compotracker.R;
+import ca.cinderblok.compotracker.DAL.CompoDbContract;
+import ca.cinderblok.compotracker.DAL.CompoDbHelper;
 
 import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.YAxis;
@@ -69,7 +74,7 @@ public abstract class ChartActivity extends AppCompatActivity {
                 String[] projection = new String[numberOfColumns + 2];
                 projection[0] = CompoDbContract.COLUMN_NAME_TIMESTAMP;
                 projection[1] = getIdColumnName();
-                int i = 2;
+                int i = 1;
                 for (String columnName : columns.keySet()) {
                     projection[++i] = columnName;
                 }

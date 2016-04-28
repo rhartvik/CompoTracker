@@ -1,4 +1,4 @@
-package ca.cinderblok.compotracker;
+package ca.cinderblok.compotracker.DAL;
 
 import android.provider.BaseColumns;
 
@@ -37,6 +37,16 @@ public final class CompoDbContract {
         public static final String COLUMN_NAME_MUSCLE = "muscle";
         public static final String COLUMN_NAME_BONE = "bone";
 
+        public static final String[] FULL_PROJECTION = new String[] {
+                COLUMN_NAME_TIMESTAMP
+                ,_ID
+                , COLUMN_NAME_TOTAL
+                , COLUMN_NAME_FAT
+                , COLUMN_NAME_WATER
+                , COLUMN_NAME_MUSCLE
+                , COLUMN_NAME_BONE
+        };
+
     }
     public static abstract class CompoPercentEntry implements BaseColumns {
 
@@ -55,6 +65,15 @@ public final class CompoDbContract {
         public static final String COLUMN_NAME_WATER = "water";
         public static final String COLUMN_NAME_MUSCLE = "muscle";
         public static final String COLUMN_NAME_BONE = "bone";
+
+        public static final String[] FULL_PROJECTION = new String[] {
+                COLUMN_NAME_TIMESTAMP
+                ,_ID
+                , COLUMN_NAME_FAT
+                , COLUMN_NAME_WATER
+                , COLUMN_NAME_MUSCLE
+                , COLUMN_NAME_BONE
+        };
 
     }
 }

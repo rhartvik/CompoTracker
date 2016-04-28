@@ -23,4 +23,5 @@
     <string name="muscle_mass">Muscle Mass</string>
     <string name="weight_chart">Weight Chart</string>
     <string name="percent_chart">Percent Chart</string>
+    <string name="title_activity_percent_chart">Percent Chart</string>
 </resources>

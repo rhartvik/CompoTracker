@@ -1,6 +1,8 @@
-package ca.cinderblok.compotracker;
+package ca.cinderblok.compotracker.Activities;
 
 import android.support.v4.util.Pair;
+import ca.cinderblok.compotracker.R;
+import ca.cinderblok.compotracker.DAL.CompoDbContract;
 import java.util.HashMap;
 
 public class PercentChartActivity extends ChartActivity {

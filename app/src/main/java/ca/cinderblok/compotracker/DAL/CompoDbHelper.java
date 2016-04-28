@@ -1,4 +1,4 @@
-package ca.cinderblok.compotracker;
+package ca.cinderblok.compotracker.DAL;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;

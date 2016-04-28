@@ -1,4 +1,4 @@
-package ca.cinderblok.compotracker;
+package ca.cinderblok.compotracker.Activities;
 
 import android.content.ContentValues;
 import android.content.Intent;
@@ -17,8 +17,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import ca.cinderblok.compotracker.R;
+import ca.cinderblok.compotracker.DAL.CompoDbContract;
+import ca.cinderblok.compotracker.DAL.CompoDbHelper;
+
 import java.util.ArrayList;
 import java.util.Date;
+
 
 public class MainActivity extends AppCompatActivity {
 
