@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#58a9bb</color>
+    <color name="colorPrimary">#849ea4</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorTotal">#996633</color>
@@ -8,4 +8,5 @@
     <color name="colorWater">#1affff</color>
     <color name="colorMuscle">#cc3399</color>
     <color name="colorBone">#e6e6ff</color>
+    <color name="white">#FFFFFF</color>
 </resources>
