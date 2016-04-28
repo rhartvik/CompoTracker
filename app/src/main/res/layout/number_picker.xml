@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <EditText
+        android:layout_width="120dp"
+        android:layout_height="@dimen/number_picker_height"
+        android:inputType="numberDecimal"
+        android:ems="10"
+        android:id="@+id/number_picker_field"
+        android:background="@color/material_grey_100"
+        android:layout_gravity="center_horizontal"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/number_picker_height"
+        android:id="@+id/plus"
+        android:text="@string/plus_symbol"
+        android:layout_gravity="right"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/number_picker_height"
+        android:id="@+id/minus"
+        android:text="@string/minus_symbol"
+        android:layout_gravity="left"/>
+
+</FrameLayout>

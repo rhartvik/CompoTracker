@@ -13,6 +13,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import java.util.Date;
 
@@ -46,11 +47,17 @@ public class MainActivity extends AppCompatActivity {
                 Date currentDate = new Date();
                 Long currentTimestamp = currentDate.getTime();
 
-                EditText bodyWeightEditText = (EditText) findViewById(R.id.bodyweight);
-                EditText fatPercentEditText = (EditText)findViewById(R.id.bodyfat);
-                EditText waterPercentEditText = (EditText)findViewById(R.id.totalbodywater);
-                EditText musclePercentEditText = (EditText)findViewById(R.id.musclemass);
-                EditText boneWeightEditText = (EditText)findViewById(R.id.bonemass);
+                FrameLayout bodyWeightPickerFrame = (FrameLayout) findViewById(R.id.body_weight_picker);
+                FrameLayout fatPercentPickerFrame = (FrameLayout) findViewById(R.id.fat_percent_picker);
+                FrameLayout waterPercentPickerFrame = (FrameLayout) findViewById(R.id.water_percent_picker);
+                FrameLayout musclePercentPickerFrame = (FrameLayout) findViewById(R.id.muscle_percent_picker);
+                FrameLayout boneWeightPickerFrame = (FrameLayout) findViewById(R.id.bone_mass_picker);
+
+                EditText bodyWeightEditText = (EditText) bodyWeightPickerFrame.findViewById(R.id.number_picker_field);
+                EditText fatPercentEditText = (EditText) fatPercentPickerFrame.findViewById(R.id.number_picker_field);
+                EditText waterPercentEditText = (EditText) waterPercentPickerFrame.findViewById(R.id.number_picker_field);
+                EditText musclePercentEditText = (EditText) musclePercentPickerFrame.findViewById(R.id.number_picker_field);
+                EditText boneWeightEditText = (EditText) boneWeightPickerFrame.findViewById(R.id.number_picker_field);
 
 
                 Double bodyWeight;

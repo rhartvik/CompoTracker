@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -11,36 +11,22 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="ca.cinderblok.compotracker.MainActivity"
     tools:showIn="@layout/activity_main"
-    android:background="@color/colorPrimary">
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/compo_tracker_1_0"
-        android:id="@+id/maintitle"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:textSize="@dimen/abc_action_button_min_width_overflow_material"
-        android:layout_marginBottom="20dp"/>
+    android:background="@color/colorPrimary"
+    android:orientation="vertical"
+    android:gravity="center">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/body_weight"
         android:id="@+id/bodyweighttitle"
-        android:layout_below="@+id/maintitle"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/under_input_title_margin" />
+        android:layout_marginBottom="@dimen/under_input_title_margin"
+        android:textColor="#ffffff" />
 
-    <EditText
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/bodyweight"
-        android:background="@color/material_grey_100"
-        android:layout_below="@+id/bodyweighttitle"
-        android:layout_centerHorizontal="true"
+    <include layout="@layout/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/body_weight_picker"
         android:layout_marginBottom="@dimen/under_input_field_margin"/>
 
     <TextView
@@ -48,86 +34,61 @@
         android:layout_height="wrap_content"
         android:text="@string/body_fat_percent"
         android:id="@+id/bodyfattitle"
-        android:layout_below="@+id/bodyweight"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/under_input_title_margin"/>
+        android:layout_marginBottom="@dimen/under_input_title_margin"
+        android:textColor="#ffffff" />
 
-    <EditText
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/bodyfat"
-        android:background="@color/material_grey_100"
-        android:layout_below="@+id/bodyfattitle"
-        android:layout_centerHorizontal="true"
+    <include layout="@layout/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/fat_percent_picker"
         android:layout_marginBottom="@dimen/under_input_field_margin"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/total_body_water"
-        android:id="@+id/totalbodywatertitle"
-        android:layout_below="@+id/bodyfat"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/under_input_title_margin"/>
+        android:id="@+id/water_field_title"
+        android:layout_marginBottom="@dimen/under_input_title_margin"
+        android:textColor="#ffffff" />
 
-    <EditText
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/totalbodywater"
-        android:background="@color/material_grey_100"
-        android:layout_below="@+id/totalbodywatertitle"
-        android:layout_centerHorizontal="true"
+    <include layout="@layout/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/water_percent_picker"
         android:layout_marginBottom="@dimen/under_input_field_margin"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/muscle_percent"
-        android:id="@+id/musclemasstitle"
-        android:layout_below="@+id/totalbodywater"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/under_input_title_margin"/>
+        android:id="@+id/muscle_field_title"
+        android:layout_marginBottom="@dimen/under_input_title_margin"
+        android:textColor="#ffffff" />
 
-    <EditText
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/musclemass"
-        android:background="@color/material_grey_100"
-        android:layout_below="@+id/musclemasstitle"
-        android:layout_centerHorizontal="true"
+    <include layout="@layout/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/muscle_percent_picker"
         android:layout_marginBottom="@dimen/under_input_field_margin"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/bone_mass"
-        android:id="@+id/bonemasstitle"
-        android:layout_below="@+id/musclemass"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="@dimen/under_input_title_margin"/>
+        android:id="@+id/bone_mass_title"
+        android:layout_marginBottom="@dimen/under_input_title_margin"
+        android:textColor="#ffffff" />
 
-    <EditText
-        android:layout_width="120dp"
-        android:layout_height="30dp"
-        android:inputType="numberDecimal"
-        android:ems="10"
-        android:id="@+id/bonemass"
-        android:background="@color/material_grey_100"
-        android:layout_below="@+id/bonemasstitle"
-        android:layout_centerHorizontal="true"
+    <include layout="@layout/number_picker"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bone_mass_picker"
         android:layout_marginBottom="@dimen/under_input_field_margin"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/weight_chart_button"
-        android:text="@string/view_weight_chart"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"/>
-</RelativeLayout>
+        android:text="@string/view_weight_chart"/>
+
+</LinearLayout>
