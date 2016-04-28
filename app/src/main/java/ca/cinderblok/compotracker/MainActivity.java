@@ -166,4 +166,36 @@ public class MainActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void incrementPicker(View view) {
+        FrameLayout frame = (FrameLayout) view.getParent();
+        EditText pickerText = (EditText) frame.findViewById(R.id.number_picker_field);
+        Float currentValue = 0F;
+        try {
+            currentValue = Float.parseFloat(pickerText.getText().toString());
+        } catch (final NumberFormatException e) {
+            Snackbar.make(view, "Error: please ensure input is properly formatted"
+                    , Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+        }
+        Float newValue = (float)((int)(currentValue * 10) + 1)/10F;
+        pickerText.setText(newValue.toString());
+    }
+
+    public void decrementPicker(View view) {
+        FrameLayout frame = (FrameLayout) view.getParent();
+        EditText pickerText = (EditText) frame.findViewById(R.id.number_picker_field);
+        Float currentValue = 0F;
+        try {
+            currentValue = Float.parseFloat(pickerText.getText().toString());
+        } catch (final NumberFormatException e) {
+            Snackbar.make(view, "Error: please ensure input is properly formatted"
+                    , Snackbar.LENGTH_SHORT)
+                    .setAction("Action", null).show();
+        }
+        Float newValue = (float)((int)(currentValue * 10) - 1)/10F;
+        if (newValue > 0F) {
+            pickerText.setText(newValue.toString());
+        }
+    }
 }
