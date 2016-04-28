@@ -89,20 +89,19 @@ public abstract class ChartActivity extends AppCompatActivity {
                         ,sortOrder);) {
                     if (c != null) {
                         // Keep track of index for MPAndroid Entrys
+                        int index = 0;
                         while (c.moveToNext()) {
-
                             long timeStamp = c.getLong (c.getColumnIndexOrThrow(CompoDbContract.COLUMN_NAME_TIMESTAMP));
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                             cal.setTimeInMillis(timeStamp);
                             String date = DateFormat.format("dd-MM-yyyy HH:mm", cal).toString();
-                            int index = c.getInt(c.getColumnIndexOrThrow(getIdColumnName()));
                             Vector<Float> values = new Vector<Float>();
                             for (String columnName : columns.keySet()) {
                                 int value10 = c.getInt (c.getColumnIndexOrThrow(columnName));
                                 values.add(((float) value10) / 10);
                                 arrayLists.get(columnName).add(new Entry(((float) value10) / 10, index));
                             }
-
+                            ++index;
                             // Save string output
                             output.append(String.format(
                                     getString(R.string.weight_entry_plaintext_short)
