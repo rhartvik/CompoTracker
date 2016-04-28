@@ -2,10 +2,12 @@ package ca.cinderblok.compotracker;
 
 import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v4.util.Pair;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
@@ -15,6 +17,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
@@ -83,16 +86,16 @@ public class MainActivity extends AppCompatActivity {
                 int bodyWeight10 = (int) (bodyWeight * 10);
 
                 int bodyFatPercent10 = (int) (bodyFatPercent * 10);
-                int bodyFatWeight10 = (int)Math.round(bodyFatPercent * bodyWeight / 10);
+                int bodyFatWeight10 = (int) Math.round(bodyFatPercent * bodyWeight / 10);
 
                 int bodyWaterPercent10 = (int) (bodyWaterPercent * 10);
-                int bodyWaterWeight10 = (int)Math.round(bodyWaterPercent * bodyWeight / 10);
+                int bodyWaterWeight10 = (int) Math.round(bodyWaterPercent * bodyWeight / 10);
 
                 int bodyMusclePercent10 = (int) (bodyMusclePercent * 10);
-                int bodyMuscleWeight10 = (int)Math.round(bodyMusclePercent * bodyWeight / 10);
+                int bodyMuscleWeight10 = (int) Math.round(bodyMusclePercent * bodyWeight / 10);
 
                 int boneWeight10 = (int) (boneWeight * 10);
-                int bonePercent10 = (int)Math.round(boneWeight * 1000 / bodyWeight);
+                int bonePercent10 = (int) Math.round(boneWeight * 1000 / bodyWeight);
 
                 // Add to Percent Table
                 ContentValues percentValues = new ContentValues();
@@ -125,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
                 // Confirm the Addition of Data
                 Snackbar.make(view, "Added new weight entry with id = " + newWeightRowId
-                        + " and new percent entry with id = " + newPercentRowId
+                                + " and new percent entry with id = " + newPercentRowId
                         , Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
@@ -136,7 +139,48 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         CompoDbHelper mDbHelper = new CompoDbHelper(this, CompoDbContract.DATABASE_NAME, null, CompoDbContract.DATABASE_VERSION);
-        mDb =  mDbHelper.getWritableDatabase(); // ????
+        mDb = mDbHelper.getWritableDatabase();
+
+        ArrayList<Pair<String,Integer>> columnNameAndPickerId = new ArrayList<>();
+        columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL,R.id.body_weight_picker));
+        columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoPercentEntry.COLUMN_NAME_FAT,R.id.fat_percent_picker));
+        columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoPercentEntry.COLUMN_NAME_WATER,R.id.water_percent_picker));
+        columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoPercentEntry.COLUMN_NAME_MUSCLE,R.id.muscle_percent_picker));
+        columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoWeightEntry.COLUMN_NAME_BONE,R.id.bone_mass_picker));
+
+        String weightTable = CompoDbContract.CompoWeightEntry.TABLE_NAME;
+        String percentTable = CompoDbContract.CompoPercentEntry.TABLE_NAME;
+        String lastInputQuery = "SELECT "
+                + weightTable + "." + CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL + ", "
+                + percentTable + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_FAT + ", "
+                + percentTable + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_WATER + ", "
+                + percentTable + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_MUSCLE + ", "
+                + weightTable + "." + CompoDbContract.CompoWeightEntry.COLUMN_NAME_BONE + " "
+                + "FROM " + percentTable + " "
+                + "LEFT JOIN " + weightTable + " ON "
+                + weightTable + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " = "
+                + percentTable + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " "
+                + "ORDER BY " + weightTable + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " DESC "
+                + "LIMIT 1";
+
+        try (Cursor c = mDb.rawQuery(lastInputQuery, new String[]{})) {
+            if (c != null) {
+                if (c.moveToFirst()) {
+                    // Load the last value
+                    for (Pair<String, Integer> col : columnNameAndPickerId) {
+                        int value10 = c.getInt(c.getColumnIndexOrThrow(col.first));
+                        Float value = (((float) value10) / 10);
+                        FrameLayout frame = (FrameLayout) findViewById(col.second);
+                        EditText editText = (EditText) frame.findViewById(R.id.number_picker_field);
+                        editText.setText(value.toString());
+                    }
+
+                } else {
+                    // TODO: Disable the weight button?
+                }
+            }
+        }
+
     }
 
     @Override
@@ -178,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
                     , Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
         }
-        Float newValue = (float)((int)(currentValue * 10) + 1)/10F;
+        Float newValue = (float) ((int) (currentValue * 10) + 1) / 10F;
         pickerText.setText(newValue.toString());
     }
 
@@ -193,7 +237,7 @@ public class MainActivity extends AppCompatActivity {
                     , Snackbar.LENGTH_SHORT)
                     .setAction("Action", null).show();
         }
-        Float newValue = (float)((int)(currentValue * 10) - 1)/10F;
+        Float newValue = (float) ((int) (currentValue * 10) - 1) / 10F;
         if (newValue > 0F) {
             pickerText.setText(newValue.toString());
         }
