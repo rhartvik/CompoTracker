@@ -16,6 +16,11 @@ public class WeightChartActivity extends ChartActivity {
     }
 
     @Override
+    protected String getIdColumnName(){
+        return CompoDbContract.CompoWeightEntry._ID;
+    }
+
+    @Override
     protected HashMap<String, Pair<Integer, Integer>> getColumns(){
         return new HashMap<String, Pair<Integer, Integer>>()
         {{

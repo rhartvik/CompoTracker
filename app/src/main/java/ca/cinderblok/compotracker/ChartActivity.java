@@ -32,6 +32,7 @@ public abstract class ChartActivity extends AppCompatActivity {
 
     protected abstract int getChartTitleId();
     protected abstract String getTableName();
+    protected abstract String getIdColumnName();
     protected abstract HashMap<String, Pair<Integer, Integer>> getColumns();
 
     @Override
@@ -65,9 +66,10 @@ public abstract class ChartActivity extends AppCompatActivity {
 
                 int numberOfColumns = columns.size();
 
-                String[] projection = new String[numberOfColumns + 1];
-                int i = 0;
-                projection[i] = CompoDbContract.COLUMN_NAME_TIMESTAMP;
+                String[] projection = new String[numberOfColumns + 2];
+                projection[0] = CompoDbContract.COLUMN_NAME_TIMESTAMP;
+                projection[1] = getIdColumnName();
+                int i = 2;
                 for (String columnName : columns.keySet()) {
                     projection[++i] = columnName;
                 }
@@ -82,14 +84,13 @@ public abstract class ChartActivity extends AppCompatActivity {
                         ,sortOrder);) {
                     if (c != null) {
                         // Keep track of index for MPAndroid Entrys
-                        int index = 0;
                         while (c.moveToNext()) {
 
                             long timeStamp = c.getLong (c.getColumnIndexOrThrow(CompoDbContract.COLUMN_NAME_TIMESTAMP));
                             Calendar cal = Calendar.getInstance(Locale.ENGLISH);
                             cal.setTimeInMillis(timeStamp);
                             String date = DateFormat.format("dd-MM-yyyy HH:mm", cal).toString();
-
+                            int index = c.getInt(c.getColumnIndexOrThrow(getIdColumnName()));
                             Vector<Float> values = new Vector<Float>();
                             for (String columnName : columns.keySet()) {
                                 int value10 = c.getInt (c.getColumnIndexOrThrow(columnName));
@@ -109,8 +110,6 @@ public abstract class ChartActivity extends AppCompatActivity {
 
                             // Save Entry output
                             datetimeLabels.add(date);
-
-                            ++index;
                         }
                     }
                 }
