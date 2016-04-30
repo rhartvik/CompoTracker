@@ -16,6 +16,18 @@ public final class CompoDbContract {
 
     public static String COLUMN_NAME_TIMESTAMP = "COLUMN_MEASUREMENT_TIMESTAMP";
 
+    public static String LAST_INPUT_QUERY = "SELECT "
+            + CompoWeightEntry.TABLE_NAME + "." + CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL + ", "
+            + CompoPercentEntry.TABLE_NAME + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_FAT + ", "
+            + CompoPercentEntry.TABLE_NAME + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_WATER + ", "
+            + CompoPercentEntry.TABLE_NAME + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_MUSCLE + ", "
+            + CompoWeightEntry.TABLE_NAME + "." + CompoDbContract.CompoWeightEntry.COLUMN_NAME_BONE + " "
+            + "FROM " + CompoPercentEntry.TABLE_NAME + " "
+            + "LEFT JOIN " + CompoWeightEntry.TABLE_NAME + " ON "
+            + CompoWeightEntry.TABLE_NAME + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " = "
+            + CompoPercentEntry.TABLE_NAME + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " "
+            + "ORDER BY " + CompoWeightEntry.TABLE_NAME + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " DESC "
+            + "LIMIT 1";
     
     public static abstract class CompoWeightEntry implements BaseColumns {
 
