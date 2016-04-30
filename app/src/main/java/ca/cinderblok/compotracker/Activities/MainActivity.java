@@ -17,6 +17,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 
+import ca.cinderblok.compotracker.Models.InputEntry;
+import ca.cinderblok.compotracker.Models.PercentEntry;
+import ca.cinderblok.compotracker.Models.WeightEntry;
 import ca.cinderblok.compotracker.R;
 import ca.cinderblok.compotracker.DAL.CompoDbContract;
 import ca.cinderblok.compotracker.DAL.CompoDbHelper;
@@ -67,19 +70,13 @@ public class MainActivity extends AppCompatActivity {
                 EditText musclePercentEditText = (EditText) musclePercentPickerFrame.findViewById(R.id.number_picker_field);
                 EditText boneWeightEditText = (EditText) boneWeightPickerFrame.findViewById(R.id.number_picker_field);
 
-
-                Double bodyWeight;
-                Double bodyFatPercent;
-                Double bodyWaterPercent;
-                Double bodyMusclePercent;
-                Double boneWeight;
-
+                InputEntry entry = new InputEntry();
                 try {
-                    bodyWeight = Double.parseDouble(bodyWeightEditText.getText().toString());
-                    bodyFatPercent = Double.parseDouble(fatPercentEditText.getText().toString());
-                    bodyWaterPercent = Double.parseDouble(waterPercentEditText.getText().toString());
-                    bodyMusclePercent = Double.parseDouble(musclePercentEditText.getText().toString());
-                    boneWeight = Double.parseDouble(boneWeightEditText.getText().toString());
+                    entry.BodyWeight = Float.parseFloat(bodyWeightEditText.getText().toString());
+                    entry.FatPercent = Float.parseFloat(fatPercentEditText.getText().toString());
+                    entry.WaterPercent = Float.parseFloat(waterPercentEditText.getText().toString());
+                    entry.MusclePercent = Float.parseFloat(musclePercentEditText.getText().toString());
+                    entry.BoneWeight = Float.parseFloat(boneWeightEditText.getText().toString());
                 } catch (final NumberFormatException e) {
 
                     Snackbar.make(view, "Number format exception. Please ensure your data is entered correctly."
@@ -88,48 +85,22 @@ public class MainActivity extends AppCompatActivity {
                     return;
                 }
 
-                int bodyWeight10 = (int) (bodyWeight * 10);
-
-                int bodyFatPercent10 = (int) (bodyFatPercent * 10);
-                int bodyFatWeight10 = (int) Math.round(bodyFatPercent * bodyWeight / 10);
-
-                int bodyWaterPercent10 = (int) (bodyWaterPercent * 10);
-                int bodyWaterWeight10 = (int) Math.round(bodyWaterPercent * bodyWeight / 10);
-
-                int bodyMusclePercent10 = (int) (bodyMusclePercent * 10);
-                int bodyMuscleWeight10 = (int) Math.round(bodyMusclePercent * bodyWeight / 10);
-
-                int boneWeight10 = (int) (boneWeight * 10);
-                int bonePercent10 = (int) Math.round(boneWeight * 1000 / bodyWeight);
+                WeightEntry weightEntry = new WeightEntry(entry);
+                PercentEntry percentEntry = new PercentEntry(entry);
 
                 // Add to Percent Table
-                ContentValues percentValues = new ContentValues();
-                percentValues.put(CompoDbContract.COLUMN_NAME_TIMESTAMP, currentTimestamp);
-                percentValues.put(CompoDbContract.CompoPercentEntry.COLUMN_NAME_FAT, bodyFatPercent10);
-                percentValues.put(CompoDbContract.CompoPercentEntry.COLUMN_NAME_WATER, bodyWaterPercent10);
-                percentValues.put(CompoDbContract.CompoPercentEntry.COLUMN_NAME_MUSCLE, bodyMusclePercent10);
-                percentValues.put(CompoDbContract.CompoPercentEntry.COLUMN_NAME_BONE, bonePercent10);
-
                 long newPercentRowId;
                 newPercentRowId = mDb.insert(
                         CompoDbContract.CompoPercentEntry.TABLE_NAME
                         , null
-                        , percentValues);
+                        , percentEntry.GetContent10Values());
 
                 // Add to Weight Table
-                ContentValues weightValues = new ContentValues();
-                weightValues.put(CompoDbContract.COLUMN_NAME_TIMESTAMP, currentTimestamp);
-                weightValues.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL, bodyWeight10);
-                weightValues.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_FAT, bodyFatWeight10);
-                weightValues.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_WATER, bodyWaterWeight10);
-                weightValues.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_MUSCLE, bodyMuscleWeight10);
-                weightValues.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_BONE, boneWeight10);
-
                 long newWeightRowId;
                 newWeightRowId = mDb.insert(
                         CompoDbContract.CompoWeightEntry.TABLE_NAME
                         , null
-                        , weightValues);
+                        , weightEntry.GetContent10Values());
 
                 // Confirm the Addition of Data
                 Snackbar.make(view, "Added new weight entry with id = " + newWeightRowId
@@ -153,22 +124,7 @@ public class MainActivity extends AppCompatActivity {
         columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoPercentEntry.COLUMN_NAME_MUSCLE,R.id.muscle_percent_picker));
         columnNameAndPickerId.add(new Pair<>(CompoDbContract.CompoWeightEntry.COLUMN_NAME_BONE,R.id.bone_mass_picker));
 
-        String weightTable = CompoDbContract.CompoWeightEntry.TABLE_NAME;
-        String percentTable = CompoDbContract.CompoPercentEntry.TABLE_NAME;
-        String lastInputQuery = "SELECT "
-                + weightTable + "." + CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL + ", "
-                + percentTable + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_FAT + ", "
-                + percentTable + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_WATER + ", "
-                + percentTable + "." + CompoDbContract.CompoPercentEntry.COLUMN_NAME_MUSCLE + ", "
-                + weightTable + "." + CompoDbContract.CompoWeightEntry.COLUMN_NAME_BONE + " "
-                + "FROM " + percentTable + " "
-                + "LEFT JOIN " + weightTable + " ON "
-                + weightTable + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " = "
-                + percentTable + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " "
-                + "ORDER BY " + weightTable + "." + CompoDbContract.COLUMN_NAME_TIMESTAMP + " DESC "
-                + "LIMIT 1";
-
-        try (Cursor c = mDb.rawQuery(lastInputQuery, new String[]{})) {
+        try (Cursor c = mDb.rawQuery(CompoDbContract.LAST_INPUT_QUERY, new String[]{})) {
             if (c != null) {
                 if (c.moveToFirst()) {
                     // Load the last value
