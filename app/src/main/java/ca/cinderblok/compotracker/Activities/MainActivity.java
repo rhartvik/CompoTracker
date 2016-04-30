@@ -1,6 +1,5 @@
 package ca.cinderblok.compotracker.Activities;
 
-import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 
 import ca.cinderblok.compotracker.Models.InputEntry;
 import ca.cinderblok.compotracker.Models.PercentEntry;
@@ -58,11 +56,11 @@ public class MainActivity extends AppCompatActivity {
                 Date currentDate = new Date();
                 Long currentTimestamp = currentDate.getTime();
 
-                FrameLayout bodyWeightPickerFrame = (FrameLayout) findViewById(R.id.body_weight_picker);
-                FrameLayout fatPercentPickerFrame = (FrameLayout) findViewById(R.id.fat_percent_picker);
-                FrameLayout waterPercentPickerFrame = (FrameLayout) findViewById(R.id.water_percent_picker);
-                FrameLayout musclePercentPickerFrame = (FrameLayout) findViewById(R.id.muscle_percent_picker);
-                FrameLayout boneWeightPickerFrame = (FrameLayout) findViewById(R.id.bone_mass_picker);
+                View bodyWeightPickerFrame = (View) findViewById(R.id.body_weight_picker);
+                View fatPercentPickerFrame = (View) findViewById(R.id.fat_percent_picker);
+                View waterPercentPickerFrame = (View) findViewById(R.id.water_percent_picker);
+                View musclePercentPickerFrame = (View) findViewById(R.id.muscle_percent_picker);
+                View boneWeightPickerFrame = (View) findViewById(R.id.bone_mass_picker);
 
                 EditText bodyWeightEditText = (EditText) bodyWeightPickerFrame.findViewById(R.id.number_picker_field);
                 EditText fatPercentEditText = (EditText) fatPercentPickerFrame.findViewById(R.id.number_picker_field);
@@ -71,6 +69,7 @@ public class MainActivity extends AppCompatActivity {
                 EditText boneWeightEditText = (EditText) boneWeightPickerFrame.findViewById(R.id.number_picker_field);
 
                 InputEntry entry = new InputEntry();
+                entry.TimeStamp = currentTimestamp;
                 try {
                     entry.BodyWeight = Float.parseFloat(bodyWeightEditText.getText().toString());
                     entry.FatPercent = Float.parseFloat(fatPercentEditText.getText().toString());
@@ -131,9 +130,10 @@ public class MainActivity extends AppCompatActivity {
                     for (Pair<String, Integer> col : columnNameAndPickerId) {
                         int value10 = c.getInt(c.getColumnIndexOrThrow(col.first));
                         Float value = (((float) value10) / 10);
-                        FrameLayout frame = (FrameLayout) findViewById(col.second);
-                        EditText editText = (EditText) frame.findViewById(R.id.number_picker_field);
+                        View view = findViewById(col.second);
+                        EditText editText = (EditText) view.findViewById(R.id.number_picker_field);
                         editText.setText(value.toString());
+
                     }
 
                 } else {
@@ -159,17 +159,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        Class c;
+        switch (item.getItemId()) {
+            case R.id.weight_chart_page:
+                c = WeightChartActivity.class;
+                break;
+            case R.id.percent_chart_page:
+                c = PercentChartActivity.class;
+                break;
+            default:
+                return super.onOptionsItemSelected(item);
         }
+        Intent toToActivity =
+                new Intent(this.getBaseContext(), c);
+        startActivity(toToActivity);
 
-        return super.onOptionsItemSelected(item);
+        return true;
     }
 
     public void incrementPicker(View view) {
