@@ -217,8 +217,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void incrementPicker(View view) {
-        FrameLayout frame = (FrameLayout) view.getParent();
-        EditText pickerText = (EditText) frame.findViewById(R.id.number_picker_field);
+        View v = (View) view.getParent();
+        EditText pickerText = (EditText) v.findViewById(R.id.number_picker_field);
         Float currentValue = 0F;
         try {
             currentValue = Float.parseFloat(pickerText.getText().toString());
@@ -232,8 +232,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void decrementPicker(View view) {
-        FrameLayout frame = (FrameLayout) view.getParent();
-        EditText pickerText = (EditText) frame.findViewById(R.id.number_picker_field);
+        View v = (View) view.getParent();
+        EditText pickerText = (EditText) v.findViewById(R.id.number_picker_field);
         Float currentValue = 0F;
         try {
             currentValue = Float.parseFloat(pickerText.getText().toString());

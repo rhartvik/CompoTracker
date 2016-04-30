@@ -9,4 +9,5 @@
     <color name="colorMuscle">#cc3399</color>
     <color name="colorBone">#e6e6ff</color>
     <color name="white">#FFFFFF</color>
+    <color name="buttoncolour">#aabbcc</color>
 </resources>
