@@ -34,7 +34,7 @@ public class WeightEntry {
     public ContentValues GetContent10Values() {
         ContentValues percent10Values = new ContentValues();
         percent10Values.put(CompoDbContract.COLUMN_NAME_TIMESTAMP, this.TimeStamp);
-        percent10Values.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL, fatWeightInt10);
+        percent10Values.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_TOTAL, bodyWeightInt10);
         percent10Values.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_FAT, fatWeightInt10);
         percent10Values.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_WATER, waterWeightInt10);
         percent10Values.put(CompoDbContract.CompoWeightEntry.COLUMN_NAME_MUSCLE, muscleWeightInt10);
