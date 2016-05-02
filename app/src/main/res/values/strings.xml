@@ -1,27 +1,27 @@
 <resources>
-    <string name="app_name">CompoTracker</string>
+    <string name="app_name">COMPO TRACKER 9000</string>
     <string name="action_settings">Settings</string>
     <string name="plus_symbol">+</string>
     <string name="minus_symbol">-</string>
-    <string name="view_weight_chart">Weight Chart</string>
-    <string name="view_percent_chart">Percent Chart</string>
-    <string name="title_activity_weight_chart">WeightChartActivity</string>
+    <string name="view_weight_chart">WEIGHT CHART</string>
+    <string name="view_percent_chart">PERCENT CHART</string>
+    <string name="title_activity_weight_chart">WEIGHT CHART</string>
     <string name="weight_entry_plaintext">
         At %1$s: Body Weight (%2$.1f) Fat(%3$.1f) Water (%4$.1f) Muscle (%5$.1f) Bone (%6$.1f)
     </string>
     <string name="weight_entry_plaintext_short">
         %1$s: \tBW: %2$.1f \tF:%3$.1f \tW:%4$.1f \tM:%5$.1f \tB:%6$.1f\n
     </string>
-    <string name="muscle_percent">Body Muscle %</string>
-    <string name="total_body_water">Total Body Water %</string>
-    <string name="body_fat_percent">Body Fat %</string>
-    <string name="body_weight">Body Weight</string>
+    <string name="muscle_percent">BODY MUSCLE %</string>
+    <string name="total_body_water">TOTAL BODY WATER %</string>
+    <string name="body_fat_percent">BODY FAT %</string>
+    <string name="body_weight">BODY WEIGHT</string>
     <string name="compo_tracker_1_0">Compo Tracker 1.0</string>
-    <string name="bone_mass">Bone Mass</string>
-    <string name="fat_mass">Fat Mass</string>
-    <string name="water_weight">Water Weight</string>
-    <string name="muscle_mass">Muscle Mass</string>
-    <string name="weight_chart">Weight Chart</string>
-    <string name="percent_chart">Percent Chart</string>
+    <string name="bone_mass">BONE MASS</string>
+    <string name="fat_mass">FAT MASS</string>
+    <string name="water_weight">WATER WEIGHT</string>
+    <string name="muscle_mass">MUSCLE MASS</string>
+    <string name="weight_chart">WEIGHT CHART</string>
+    <string name="percent_chart">PERCENT CHART</string>
     <string name="title_activity_percent_chart">Percent Chart</string>
 </resources>
